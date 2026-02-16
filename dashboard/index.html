@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KW AI News Dashboard</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="logo.webp">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="logo.webp" alt="KW Logo" class="logo">
+                    <h1 class="brand-title">AI News Hub</h1>
+                </div>
+
+                <div class="search-container">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM19 19l-4.35-4.35" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <input type="text" class="search-input" placeholder="Search articles..." id="searchInput">
+                </div>
+
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="refreshBtn">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 4v6h6M19 16v-6h-6M2.51 9A8 8 0 0 1 17 6.5M17.49 11A8 8 0 0 1 3 13.5"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Refresh
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <span class="filter-label">Filter by:</span>
+            <div class="filter-pills">
+                <button class="filter-pill active" data-filter="all">All Sources</button>
+                <button class="filter-pill" data-filter="category:ai">🤖 AI News</button>
+                <button class="filter-pill" data-filter="category:crypto">🪙 Crypto</button>
+                <button class="filter-pill" data-filter="category:consulting">💼 Consulting</button>
+                <button class="filter-pill" data-filter="bens_bites">Ben's Bites</button>
+                <button class="filter-pill" data-filter="ai_rundown">AI Rundown</button>
+                <button class="filter-pill" data-filter="cointelegraph">CoinTelegraph</button>
+                <button class="filter-pill" data-filter="decrypt">Decrypt</button>
+                <button class="filter-pill" data-filter="mckinsey">McKinsey</button>
+                <button class="filter-pill" data-filter="hbr">HBR</button>
+                <button class="filter-pill" data-filter="saved">💾 Saved</button>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h2 class="hero-title">Your Premium News Hub</h2>
+                <p class="hero-subtitle">Curated news from AI, Crypto, and Consulting sources - all in one beautiful
+                    dashboard.</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-value" id="totalArticles">0</span>
+                        <span class="stat-label">Articles Today</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="savedCount">0</span>
+                        <span class="stat-label">Saved Articles</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="lastUpdate">--:--</span>
+                        <span class="stat-label">Last Updated</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="section-header">
+                <h3 class="section-title" id="sectionTitle">Latest Articles</h3>
+                <button class="btn btn-secondary" id="sortBtn">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 6h14M6 10h11M9 14h8" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" />
+                    </svg>
+                    Sort by Date
+                </button>
+            </div>
+
+            <!-- Loading State -->
+            <div class="loading-container" id="loadingState" style="display: none;">
+                <div class="spinner"></div>
+                <p style="margin-top: 1rem; color: var(--text-secondary);">Loading articles...</p>
+            </div>
+
+            <!-- Articles Grid -->
+            <div class="articles-grid" id="articlesGrid">
+                <!-- Articles will be dynamically inserted here -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <div class="empty-icon">📰</div>
+                <h3 class="empty-title">No articles found</h3>
+                <p class="empty-description">Check back later for the latest AI news, or try adjusting your filters.</p>
+                <button class="btn btn-primary" id="clearFiltersBtn">Clear Filters</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,161 @@
+#!/usr/bin/env python3
+"""
+AI Rundown Newsletter Scraper (RSS Version)
+Follows architecture SOP: architecture/scraper_ai_rundown.md
+Conforms to schemas defined in: gemini.md
+"""
+
+import json
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+from typing import List, Dict
+
+import feedparser
+from dateutil import parser as date_parser
+
+
+# Constants
+RSS_URL = "https://rss.beehiiv.com/feeds/2R3C6Bt5wj.xml"
+TMP_DIR = Path(__file__).parent.parent / ".tmp"
+ERROR_LOG = TMP_DIR / "errors.log"
+
+
+def log_error(message: str) -> None:
+    """Log error to .tmp/errors.log"""
+    TMP_DIR.mkdir(exist_ok=True)
+    timestamp = datetime.now(timezone.utc).isoformat()
+    with open(ERROR_LOG, "a") as f:
+        f.write(f"[{timestamp}] [AIRundown] {message}\n")
+
+
+def fetch_rss() -> Dict:
+    """Fetch and parse RSS feed"""
+    try:
+        feed = feedparser.parse(RSS_URL)
+        
+        if feed.bozo:  # bozo bit indicates malformed feed
+            log_error(f"Malformed RSS feed: {feed.bozo_exception}")
+        
+        return feed
+    except Exception as e:
+        log_error(f"Failed to fetch RSS feed: {e}")
+        return None
+
+
+def parse_articles(feed: Dict) -> List[Dict]:
+    """Extract articles from RSS feed"""
+    articles = []
+    
+    if not feed or "entries" not in feed:
+        return articles
+    
+    for entry in feed.entries:
+        try:
+            # Extract title
+            title = entry.get("title", "").strip()
+            if not title:
+                continue
+            
+            # Extract URL
+            url = entry.get("link", "").strip()
+            if not url:
+                continue
+            
+            # Extract publish date
+            pub_date_str = entry.get("published", "")
+            if not pub_date_str:
+                log_error(f"Article missing publish date: {url}")
+                continue
+            
+            # Parse publish date
+            try:
+                pub_date = date_parser.parse(pub_date_str)
+            except Exception as e:
+                log_error(f"Failed to parse date '{pub_date_str}' for {url}: {e}")
+                continue
+            
+            # Ensure timezone-aware
+            if pub_date.tzinfo is None:
+                pub_date = pub_date.replace(tzinfo=timezone.utc)
+            
+            # Extract summary/description
+            summary = entry.get("summary", "").strip()
+            
+            # Extract author
+            author = entry.get("author", None)
+            
+            articles.append({
+                "title": title,
+                "url": url,
+                "published_at": pub_date.isoformat(),
+                "summary": summary,
+                "author": author
+            })
+        except Exception as e:
+            log_error(f"Failed to parse RSS entry: {e}")
+            continue
+    
+    return articles
+
+
+def filter_24h(articles: List[Dict]) -> List[Dict]:
+    """Filter articles to last 24 hours"""
+    now = datetime.now(timezone.utc)
+    cutoff = now - timedelta(hours=24)
+    filtered = []
+    
+    for article in articles:
+        try:
+            pub_date = datetime.fromisoformat(article["published_at"])
+            
+            if pub_date >= cutoff:
+                filtered.append(article)
+        except Exception as e:
+            log_error(f"Failed to filter article {article.get('url', 'unknown')}: {e}")
+            continue
+    
+    return filtered
+
+
+def main() -> Dict:
+    """Main scraper function - returns Scraper Output Schema"""
+    result = {
+        "source": "ai_rundown",
+        "scrape_timestamp": datetime.now(timezone.utc).isoformat(),
+        "articles": [],
+        "errors": [],
+        "success": True
+    }
+    
+    # Fetch RSS feed
+    feed = fetch_rss()
+    if feed is None:
+        result["success"] = False
+        result["errors"].append("Unable to fetch RSS feed")
+        return result
+    
+    # Parse articles
+    try:
+        articles = parse_articles(feed)
+    except Exception as e:
+        log_error(f"Failed to parse articles: {e}")
+        result["success"] = False
+        result["errors"].append(f"Failed to parse articles: {e}")
+        return result
+    
+    # Filter to 24 hours
+    try:
+        filtered = filter_24h(articles)
+        result["articles"] = filtered
+    except Exception as e:
+        log_error(f"Failed to filter articles: {e}")
+        result["success"] = False
+        result["errors"].append(f"Failed to filter articles: {e}")
+        return result
+    
+    return result
+
+
+if __name__ == "__main__":
+    output = main()
+    print(json.dumps(output, indent=2))
