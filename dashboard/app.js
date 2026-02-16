@@ -92,9 +92,9 @@ async function fetchArticles() {
         {
             id: '1',
             source: 'bens_bites',
-            title: 'OpenAI Launches GPT-5 with Revolutionary Reasoning Capabilities',
-            summary: 'OpenAI has unveiled GPT-5, featuring advanced reasoning capabilities that surpass previous models...',
-            url: 'https://www.bensbites.com/p/openai-launches-gpt-5',
+            title: 'Something big is happening',
+            summary: 'Not just $60m seed rounds... The latest from Ben\'s Bites on the shifting AI landscape.',
+            url: 'https://bensbites.substack.com/p/something-big-is-happening',
             published_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
             author: 'Ben Tossell',
             is_saved: false
@@ -102,9 +102,9 @@ async function fetchArticles() {
         {
             id: '2',
             source: 'ai_rundown',
-            title: 'Google DeepMind Achieves Breakthrough in Protein Folding',
-            summary: 'DeepMind\'s latest AlphaFold iteration can now predict protein structures with 99% accuracy...',
-            url: 'https://www.therundown.ai/p/google-deepmind-breakthrough',
+            title: 'The Rundown: Google\'s upgrade breaks reasoning barriers',
+            summary: 'Google\'s upgraded Deep Think AI shatters reasoning benchmarks, demonstrating unprecedented problem-solving capabilities.',
+            url: 'https://www.therundown.ai/p/googles-upgrade-breaks-reasoning-barriers',
             published_at: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
             author: 'Rowan Cheung',
             is_saved: false
@@ -112,9 +112,9 @@ async function fetchArticles() {
         {
             id: '3',
             source: 'cointelegraph',
-            title: 'Bitcoin Surges Past $100K as Institutional Adoption Accelerates',
-            summary: 'Bitcoin reached a new all-time high today as major financial institutions announce crypto integration...',
-            url: 'https://cointelegraph.com/news/bitcoin-institutional-adoption-accelerates',
+            title: 'Strategy Plans to Equitize Convertible Debt Over Next 3-6 Years: Saylor',
+            summary: 'MicroStrategy continues its Bitcoin accumulation strategy while managing debt obligations...',
+            url: 'https://cointelegraph.com/news/strategy-plans-equitize-convertible-debt-over-next-3-6-years-saylor',
             published_at: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString(),
             author: 'CoinTelegraph',
             is_saved: false
@@ -122,9 +122,9 @@ async function fetchArticles() {
         {
             id: '4',
             source: 'decrypt',
-            title: 'Ethereum 3.0 Roadmap Unveiled: Scalability Solutions on Horizon',
-            summary: 'Ethereum Foundation reveals ambitious plans for Ethereum 3.0, promising 100x scalability improvements...',
-            url: 'https://decrypt.co/news/ethereum-3-0-roadmap-unveiled',
+            title: 'Bitcoin Leverage Heats Up as Traders Bet on Price Rebound',
+            summary: 'Bitcoin\'s futures basis has widened amid retail dip buying surges, but experts warn of potential shakeout...',
+            url: 'https://decrypt.co/358134/bitcoin-leverage-heats-up-as-traders-bet-on-price-rebound',
             published_at: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
             author: 'Decrypt',
             is_saved: false
@@ -132,9 +132,9 @@ async function fetchArticles() {
         {
             id: '5',
             source: 'mckinsey',
-            title: 'The Future of Strategy: AI-Driven Decision Making in 2026',
-            summary: 'McKinsey research shows that companies leveraging AI for strategic decisions outperform peers by 40%...',
-            url: 'https://www.mckinsey.com/capabilities/strategy-and-corporate-finance/our-insights/the-future-of-strategy',
+            title: 'Building Leaders in the Age of AI',
+            summary: 'New research explores why digital fluency alone isn\'t enough—leaders must combine human strengths with AI capabilities.',
+            url: 'https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/building-leaders-in-the-age-of-ai',
             published_at: new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString(),
             author: 'McKinsey & Company',
             is_saved: false
@@ -142,9 +142,9 @@ async function fetchArticles() {
         {
             id: '6',
             source: 'hbr',
-            title: 'Rethinking Organizational Structure in the Age of Remote Work',
-            summary: 'Harvard Business Review explores how leading companies are restructuring for distributed teams...',
-            url: 'https://hbr.org/2026/02/rethinking-organizational-structure',
+            title: 'Match Your AI Strategy to Your Organization\'s Reality',
+            summary: 'Don\'t just copy the tech giants. Tailor your AI adoption to your company\'s specific strengths and constraints.',
+            url: 'https://hbr.org/2026/01/match-your-ai-strategy-to-your-organizations-reality',
             published_at: new Date(Date.now() - 18 * 60 * 60 * 1000).toISOString(),
             author: 'Harvard Business Review',
             is_saved: false
@@ -154,7 +154,7 @@ async function fetchArticles() {
             source: 'bens_bites',
             title: 'Anthropic Releases Claude 4: Enhanced Safety and Reasoning',
             summary: 'Anthropic\'s latest model Claude 4 sets new benchmarks in AI safety while maintaining strong performance...',
-            url: 'https://www.bensbites.com/p/anthropic-releases-claude-4',
+            url: 'https://bensbites.substack.com/archive',
             published_at: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
             author: 'Ben Tossell',
             is_saved: false
@@ -162,9 +162,9 @@ async function fetchArticles() {
         {
             id: '8',
             source: 'decrypt',
-            title: 'DeFi TVL Reaches $200B Milestone as Adoption Grows',
-            summary: 'Total Value Locked in DeFi protocols surpasses $200 billion, signaling mainstream acceptance...',
-            url: 'https://decrypt.co/news/defi-tvl-reaches-200b-milestone',
+            title: 'Hollywood\'s AI Crackdown Opens Door for Copyright Detection Startups',
+            summary: 'Studios are escalating pressure on AI developers, as new tools aim to document whether generative models are trained on copyrighted material.',
+            url: 'https://decrypt.co/358131/hollywoods-ai-crackdown-copyright-detection-startups',
             published_at: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
             author: 'Decrypt',
             is_saved: false
