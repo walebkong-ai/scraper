@@ -28,18 +28,13 @@ def log_error(message: str) -> None:
         f.write(f"[{timestamp}] [AIRundown] {message}\n")
 
 
+from tools.scraper_utils import fetch_rss_feed
+
+
 def fetch_rss() -> Dict:
     """Fetch and parse RSS feed"""
-    try:
-        feed = feedparser.parse(RSS_URL)
-        
-        if feed.bozo:  # bozo bit indicates malformed feed
-            log_error(f"Malformed RSS feed: {feed.bozo_exception}")
-        
-        return feed
-    except Exception as e:
-        log_error(f"Failed to fetch RSS feed: {e}")
-        return None
+    # Use robust fetcher with retries and timeout
+    return fetch_rss_feed(RSS_URL)
 
 
 def parse_articles(feed: Dict) -> List[Dict]:
@@ -117,7 +112,7 @@ def filter_24h(articles: List[Dict]) -> List[Dict]:
     return filtered
 
 
-def main() -> Dict:
+def scrape_ai_rundown() -> Dict:
     """Main scraper function - returns Scraper Output Schema"""
     result = {
         "source": "ai_rundown",
@@ -157,5 +152,5 @@ def main() -> Dict:
 
 
 if __name__ == "__main__":
-    output = main()
+    output = scrape_ai_rundown()
     print(json.dumps(output, indent=2))

@@ -12,6 +12,7 @@ from datetime import datetime, timezone, timedelta
 from dateutil import parser as date_parser
 import time
 import logging
+from tools.scraper_utils import fetch_rss_feed
 
 # Configure logging
 logging.basicConfig(
@@ -43,12 +44,19 @@ def scrape_hbr():
         "success": False
     }
     
+
+
     try:
         logging.info(f"Fetching HBR RSS feed from {RSS_URL}")
         
         # Parse RSS feed
-        feed = feedparser.parse(RSS_URL)
-        
+        feed = fetch_rss_feed(RSS_URL)
+         
+        if feed is None:
+             error_msg = "Failed to fetch RSS feed"
+             output["errors"].append(error_msg)
+             return output
+
         if feed.bozo:
             error_msg = f"RSS feed parsing error: {feed.bozo_exception}"
             logging.error(error_msg)
