@@ -363,7 +363,7 @@ function toggleSave(articleId) {
 function updateStats() {
     elements.totalArticles.textContent = state.articles.length;
     elements.savedCount.textContent = state.articles.filter(a => state.savedArticles.includes(a.id)).length; // Updated saved count logic
-    elements.sourcesCount.textContent = '6'; // Updated to 6 sources
+    elements.sourcesCount.textContent = '8'; // Updated to 8 sources
     elements.lastUpdate.textContent = new Date().toLocaleTimeString('en-US', {
         hour: '2-digit',
         minute: '2-digit'
@@ -404,7 +404,9 @@ function getSourceLabel(source) {
         'cointelegraph': 'CoinTelegraph',
         'decrypt': 'Decrypt',
         'mckinsey': 'McKinsey Insights',
-        'hbr': 'Harvard Business Review'
+        'hbr': 'Harvard Business Review',
+        'bcg': 'Boston Consulting Group',
+        'bain': 'Bain & Company'
     };
     return labels[source] || source;
 }
@@ -417,7 +419,9 @@ function getSourceCategory(source) {
         'cointelegraph': 'crypto',
         'decrypt': 'crypto',
         'mckinsey': 'consulting',
-        'hbr': 'consulting'
+        'hbr': 'consulting',
+        'bcg': 'consulting',
+        'bain': 'consulting'
     };
     return categories[source] || 'other';
 }

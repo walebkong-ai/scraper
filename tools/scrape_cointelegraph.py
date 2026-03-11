@@ -57,11 +57,7 @@ def scrape_cointelegraph():
              output["errors"].append(error_msg)
              return output
 
-        if feed.bozo:
-            error_msg = f"RSS feed parsing error: {feed.bozo_exception}"
-            logging.error(error_msg)
-            output["errors"].append(error_msg)
-            return output
+
         
         logging.info(f"Successfully parsed RSS feed. Found {len(feed.entries)} entries")
         

@@ -14,10 +14,10 @@ from typing import Optional, Dict, Any
 logger = logging.getLogger("scraper_utils")
 
 def get_session(
-    retries: int = 3,
-    backoff_factor: float = 0.5,
+    retries: int = 5,
+    backoff_factor: float = 1.0,
     status_forcelist: tuple = (500, 502, 503, 504, 429),
-    timeout: int = 30
+    timeout: int = 45
 ) -> requests.Session:
     """
     Creates a requests Session with retry logic and standard headers.
@@ -52,13 +52,13 @@ def get_session(
     
     return session
 
-def fetch_rss_feed(url: str, timeout: int = 30) -> Optional[Dict[str, Any]]:
+def fetch_rss_feed(url: str, timeout: int = 45) -> Optional[Dict[str, Any]]:
     """
     Fetches and parses an RSS feed with robust error handling.
     
     Args:
         url: The URL of the RSS feed
-        timeout: Request timeout in seconds (default: 30)
+        timeout: Request timeout in seconds (default: 45)
         
     Returns:
         Parsed feed object (dict-like) or None if fetching failed
